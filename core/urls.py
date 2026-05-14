@@ -31,4 +31,5 @@ urlpatterns = [
     path('api/fleet/', include('fleet.urls')),
     path('api/routes/', include('routes.urls')),
     path('api/clients/', include('clients.urls')),
+    path('api/operations/', include('operations.urls')),
 ]

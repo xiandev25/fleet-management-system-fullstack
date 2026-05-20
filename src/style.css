@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@theme {
+  /* Asphalt & Tar (Dark Mode Bases) */
+  --color-brand-asphalt: #0f111a;          /* Smooth new asphalt at night (Main Background) */
+  --color-brand-asphalt-light: #161a26;    /* Surface containers, sidebars (Polished tar) */
+  --color-brand-asphalt-lighter: #22293b;  /* Card panels, borders (Highway concrete gray) */
+  
+  /* High-Visibility Accents (Road Markings & Traffic Signs) */
+  --color-brand-highway-yellow: #facc15;   /* Reflector Lane Yellow (Primary Accent / Buttons) */
+  --color-brand-highway-yellow-hover: #eab308;
+  --color-brand-highway-yellow-glow: rgba(250, 204, 21, 0.12);
+  
+  --color-brand-sign-blue: #0284c7;        /* Highway Guide Sign Blue (Secondary Accent / Links) */
+  --color-brand-sign-blue-hover: #0369a1;
+  --color-brand-sign-blue-glow: rgba(2, 132, 199, 0.15);
+
+  /* Status Colors (Traffic Signals & Road Safety) */
+  --color-status-go: #10b981;              /* Success / Available (Green Traffic Light) */
+  --color-status-caution: #f97316;         /* Warning / Alert (Construction Cone Orange) */
+  --color-status-stop: #ef4444;            /* Critical / Overdue (Stop Sign Red) */
+}
+
+/* Custom Base Styles */
+html, body {
+  background-color: #0f111a; /* brand-asphalt */
+  color: #f3f4f6; /* gray-100 */
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Utility: Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0f111a;
+}
+::-webkit-scrollbar-thumb {
+  background: #22293b;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #facc15;
+}

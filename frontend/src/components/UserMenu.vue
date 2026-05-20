@@ -25,15 +25,15 @@
     <transition name="wind">
       <div 
         v-if="isOpen" 
-        class="absolute right-0 mt-2.5 w-56 rounded-2xl bg-brand-asphalt-light border border-brand-asphalt-lighter shadow-2xl p-3.5 z-50 text-left flex flex-col gap-3 backdrop-blur-xl"
+        class="absolute right-0 mt-2.5 w-64 rounded-2xl bg-brand-asphalt-light border border-brand-asphalt-lighter shadow-2xl p-4 z-50 text-left flex flex-col gap-3 backdrop-blur-xl"
       >
         <!-- A. Header (User Info / Status) -->
         <div class="px-1.5 py-1">
-          <h4 class="font-extrabold text-xs uppercase tracking-wider text-gray-50 truncate">
+          <h4 class="font-extrabold text-sm uppercase tracking-wider text-gray-50 truncate">
             {{ auth.isAuthenticated ? auth.user?.username : 'Guest Node' }}
           </h4>
           <span 
-            class="inline-flex items-center mt-1 px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-widest border"
+            class="inline-flex items-center mt-1 px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-widest border"
             :class="auth.isAuthenticated
               ? 'bg-brand-sign-blue-glow text-brand-sign-blue border-brand-sign-blue/20'
               : 'bg-brand-asphalt-lighter text-gray-500 border-brand-asphalt-lighter'"
@@ -46,13 +46,13 @@
 
         <!-- B. Display Theme Preferences -->
         <div class="px-1">
-          <span class="text-[8px] font-black text-gray-500 uppercase tracking-widest block mb-2">Display Mode</span>
+          <span class="text-xs font-black text-gray-400 uppercase tracking-widest block mb-2">Display Mode</span>
           <div class="grid grid-cols-2 bg-brand-asphalt/60 border border-brand-asphalt-lighter p-0.5 rounded-xl">
             <button 
               v-for="opt in themes"
               :key="opt.id"
               @click="themeStore.setTheme(opt.id)"
-              class="py-1 rounded-lg text-[8px] font-black uppercase tracking-wider text-center transition-all duration-150 cursor-pointer"
+              class="py-1.5 rounded-lg text-xs font-black uppercase tracking-wider text-center transition-all duration-150 cursor-pointer"
               :class="themeStore.theme === opt.id 
                 ? 'bg-brand-highway-yellow text-brand-asphalt font-black shadow-sm' 
                 : 'text-gray-400 hover:text-gray-200'"
@@ -69,7 +69,7 @@
           <button 
             v-if="auth.isAuthenticated"
             @click="handleLogout"
-            class="w-full flex items-center justify-between px-3 py-2 rounded-xl text-[10px] font-extrabold uppercase tracking-wider text-red-400 hover:bg-red-500/10 transition duration-150 cursor-pointer"
+            class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-bold uppercase tracking-wider text-red-400 hover:bg-red-500/10 transition duration-150 cursor-pointer"
           >
             <span>Sign Out</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
@@ -80,7 +80,7 @@
             v-else
             to="/login"
             @click="closeMenu"
-            class="w-full flex items-center justify-between px-3 py-2 rounded-xl text-[10px] font-extrabold uppercase tracking-wider bg-brand-highway-yellow hover:bg-brand-highway-yellow-hover text-brand-asphalt transition duration-150 cursor-pointer shadow-sm shadow-brand-highway-yellow-glow"
+            class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-bold uppercase tracking-wider bg-brand-highway-yellow hover:bg-brand-highway-yellow-hover text-brand-asphalt transition duration-150 cursor-pointer shadow-sm"
           >
             <span>Log In</span>
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">

@@ -41,26 +41,26 @@
     <!-- 2. CENTRAL HERO BLOCK (Single-Frame Focused Overlay) -->
     <main class="w-full max-w-xl mx-auto flex flex-col items-center text-center justify-center flex-grow z-10 relative">
       
-      <!-- Minimal Telemetry Badge representing the Road & Direction -->
+      <!-- Minimal Telemetry Badge representing the Community -->
       <div class="inline-flex items-center gap-2 bg-brand-asphalt-light border border-brand-asphalt-lighter rounded-full px-4.5 py-1.5 text-[9px] font-black uppercase tracking-widest text-brand-highway-yellow mb-8 shadow-sm">
         <span>●</span>
-        <span>Route Dispatch Orchestrator</span>
+        <span>Community Fleet Management</span>
         <span>●</span>
       </div>
 
       <h1 class="text-4xl md:text-5xl font-black tracking-tighter text-gray-50 uppercase leading-none mb-6">
-        THE DIGITAL ROAD<br />
-        <span class="text-brand-highway-yellow">TO TELEMETRY DESK</span>
+        SAFE & RELIABLE<br />
+        <span class="text-brand-highway-yellow">SCHOOL TRANSIT</span>
       </h1>
 
       <p class="text-sm text-gray-400 font-medium tracking-wide max-w-md mb-10 leading-relaxed">
-        Say goodbye to fragmented dispatch logs. A unified system integrating real-time telemetry registries, verified fleet asset monitoring, and automatic collision checks.
+        A unified platform connecting fleet managers, school administrators, and families for a secure, eco-friendly daily commute.
       </p>
 
       <!-- Hopeful CTA Button -->
       <router-link
         :to="auth.isAuthenticated ? '/dashboard' : '/login'"
-        class="px-8 py-4 bg-brand-highway-yellow hover:bg-brand-highway-yellow-hover text-brand-asphalt font-black text-xs uppercase tracking-widest rounded-2xl transition duration-200 shadow-xl hover:shadow-brand-highway-yellow-glow cursor-pointer inline-flex items-center gap-2 active:scale-98"
+        class="px-8 py-4 bg-brand-highway-yellow hover:bg-brand-highway-yellow-hover text-brand-asphalt font-black text-xs uppercase tracking-widest rounded-2xl transition duration-200 shadow-xl hover:scale-[1.03] cursor-pointer inline-flex items-center gap-2 active:scale-98"
       >
         <span>ENTER SYSTEM PORTAL</span>
         <span class="text-sm font-semibold">➔</span>
@@ -71,17 +71,11 @@
     <!-- 3. FOOTER (Minimalist representation of "The Naked Nature, the Road and Hope") -->
     <footer class="w-full max-w-7xl mx-auto flex flex-col items-center z-10 relative">
       
-      <!-- Poetic Road & Dawn Animation Segment -->
-      <div class="w-full max-w-md h-[1px] bg-brand-asphalt-lighter relative mb-8 overflow-hidden rounded-full">
-        <!-- Moving node representing a vehicle heading toward hope -->
-        <div class="absolute top-0 w-12 h-[1px] bg-brand-highway-yellow animate-road-travel"></div>
-      </div>
-
-      <div class="w-full flex flex-col md:flex-row items-center justify-between text-[9px] font-bold text-gray-500 uppercase tracking-widest gap-4">
+      <div class="w-full flex flex-col md:flex-row items-center justify-between text-[9px] font-bold text-gray-500 uppercase tracking-widest gap-4 mt-8">
         <span>© 2026 Fleet Management System. All systems nominal.</span>
         <span class="flex items-center gap-2">
           <span class="w-1.5 h-1.5 rounded-full bg-status-go animate-ping"></span>
-          <span>Naked Nature, The Road and Hope</span>
+          <span>Eco-Friendly Community Transit & Family Trust</span>
         </span>
       </div>
     </footer>

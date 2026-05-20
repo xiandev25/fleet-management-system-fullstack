@@ -99,7 +99,7 @@
         <!-- Action Buttons -->
         <button 
           @click="showAddVehicleModal = true"
-          class="flex items-center gap-2 px-4 py-2 bg-brand-highway-yellow hover:bg-brand-highway-yellow-hover text-brand-asphalt font-bold text-xs rounded-xl uppercase tracking-wider transition duration-150 cursor-pointer shadow-lg hover:shadow-brand-highway-yellow-glow"
+          class="flex items-center gap-2 px-4 py-2 bg-brand-highway-yellow hover:bg-brand-highway-yellow-hover text-brand-asphalt font-bold text-xs rounded-xl uppercase tracking-wider transition duration-150 cursor-pointer shadow-md hover:scale-[1.02]"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />

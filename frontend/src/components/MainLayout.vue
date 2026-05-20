@@ -22,7 +22,7 @@
           :to="item.to"
           class="flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-200 group"
           :class="isActive(item.to) 
-            ? 'bg-brand-highway-yellow-glow text-brand-highway-yellow border border-brand-highway-yellow/20 font-semibold shadow-lg shadow-brand-highway-yellow-glow' 
+            ? 'bg-brand-highway-yellow/10 text-brand-highway-yellow border border-brand-highway-yellow/30 font-semibold shadow-md' 
             : 'text-gray-400 hover:bg-brand-asphalt-lighter hover:text-gray-100 border border-transparent'"
         >
           <component 

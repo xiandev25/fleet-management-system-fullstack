@@ -2,10 +2,7 @@
   <div class="min-h-screen flex items-center justify-center bg-brand-asphalt px-4 relative overflow-hidden">
     
     <!-- Background highway decorative stripes -->
-    <div class="absolute inset-0 opacity-5 pointer-events-none">
-      <div class="absolute w-[2px] h-full bg-brand-highway-yellow left-1/3 border-dashed border-spacing-y-4"></div>
-      <div class="absolute w-[2px] h-full bg-brand-highway-yellow left-2/3 border-dashed border-spacing-y-4"></div>
-    </div>
+
 
     <!-- Login Card Container -->
     <div class="w-full max-w-md bg-brand-asphalt-light/80 backdrop-blur-xl border border-brand-asphalt-lighter rounded-2xl shadow-2xl p-8 relative z-10 transition-all duration-300 hover:border-brand-highway-yellow/30">
@@ -14,7 +11,7 @@
       <div class="flex flex-col items-center mb-8">
         <router-link 
           to="/"
-          class="w-16 h-16 rounded-2xl bg-brand-asphalt flex items-center justify-center border-2 border-brand-highway-yellow shadow-lg shadow-brand-highway-yellow-glow mb-4 transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer block"
+          class="w-16 h-16 rounded-2xl bg-brand-asphalt flex items-center justify-center border-2 border-brand-highway-yellow shadow-lg mb-4 transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer block"
         >
           <svg class="w-9 h-9 text-brand-highway-yellow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
@@ -92,7 +89,7 @@
         <button
           type="submit"
           :disabled="auth.loading"
-          class="w-full flex items-center justify-center py-3.5 px-4 bg-brand-highway-yellow hover:bg-brand-highway-yellow-hover disabled:bg-gray-700 text-brand-asphalt font-bold text-sm rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-brand-highway-yellow/20 cursor-pointer shadow-lg hover:shadow-brand-highway-yellow-glow"
+          class="w-full flex items-center justify-center py-3.5 px-4 bg-brand-highway-yellow hover:bg-brand-highway-yellow-hover disabled:bg-gray-700 text-brand-asphalt font-bold text-sm rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-brand-highway-yellow/20 cursor-pointer shadow-md hover:scale-[1.01]"
         >
           <!-- Spinning Indicator -->
           <svg 
@@ -108,12 +105,11 @@
         </button>
       </form>
       
-      <!-- Footer Copyright info resembling highway markings -->
+      <!-- Footer Copyright info -->
       <div class="mt-8 text-center border-t border-brand-asphalt-lighter pt-5">
         <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest flex items-center justify-center gap-1.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-brand-highway-yellow"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-status-go animate-pulse"></span>
           Secure Connection Active
-          <span class="w-1.5 h-1.5 rounded-full bg-brand-highway-yellow"></span>
         </span>
       </div>
 

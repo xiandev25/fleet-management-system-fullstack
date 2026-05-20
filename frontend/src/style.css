@@ -1,31 +1,105 @@
 @import "tailwindcss";
 
 @theme {
-  /* Asphalt & Tar (Dark Mode Bases) */
-  --color-brand-asphalt: #0f111a;          /* Smooth new asphalt at night (Main Background) */
-  --color-brand-asphalt-light: #161a26;    /* Surface containers, sidebars (Polished tar) */
-  --color-brand-asphalt-lighter: #22293b;  /* Card panels, borders (Highway concrete gray) */
+  /* Asphalt & Tar (Theme Variable Bases) */
+  --color-brand-asphalt: var(--brand-asphalt);
+  --color-brand-asphalt-light: var(--brand-asphalt-light);
+  --color-brand-asphalt-lighter: var(--brand-asphalt-lighter);
   
   /* High-Visibility Accents (Road Markings & Traffic Signs) */
-  --color-brand-highway-yellow: #facc15;   /* Reflector Lane Yellow (Primary Accent / Buttons) */
-  --color-brand-highway-yellow-hover: #eab308;
-  --color-brand-highway-yellow-glow: rgba(250, 204, 21, 0.12);
+  --color-brand-highway-yellow: var(--brand-accent-amber);
+  --color-brand-highway-yellow-hover: var(--brand-accent-amber-hover);
+  --color-brand-highway-yellow-glow: var(--brand-accent-amber-glow);
   
-  --color-brand-sign-blue: #0284c7;        /* Highway Guide Sign Blue (Secondary Accent / Links) */
-  --color-brand-sign-blue-hover: #0369a1;
-  --color-brand-sign-blue-glow: rgba(2, 132, 199, 0.15);
+  --color-brand-sign-blue: var(--brand-sign-blue);
+  --color-brand-sign-blue-hover: var(--brand-sign-blue-hover);
+  --color-brand-sign-blue-glow: var(--brand-sign-blue-glow);
 
   /* Status Colors (Traffic Signals & Road Safety) */
-  --color-status-go: #10b981;              /* Success / Available (Green Traffic Light) */
-  --color-status-caution: #f97316;         /* Warning / Alert (Construction Cone Orange) */
-  --color-status-stop: #ef4444;            /* Critical / Overdue (Stop Sign Red) */
+  --color-status-go: #10b981;              /* Success / Available */
+  --color-status-caution: #f97316;         /* Warning / Alert */
+  --color-status-stop: #ef4444;            /* Critical / Overdue */
+}
+
+/* Community Transit Green Theme (Eco-Friendly & Family Trust) */
+:root {
+  --brand-asphalt: #0b1c14;          /* Deep Forest Night */
+  --brand-asphalt-light: #112b1f;    /* Forest Canopy */
+  --brand-asphalt-lighter: #1a402e;  /* Forest Leaf */
+  --brand-accent-amber: #10b981;     /* Vibrant Emerald Green */
+  --brand-accent-amber-hover: #059669;
+  --brand-accent-amber-glow: rgba(16, 185, 129, 0.12);
+  --brand-sign-blue: #0284c7;        /* Hopeful guide-sign blue */
+  --brand-sign-blue-hover: #0369a1;
+  --brand-sign-blue-glow: rgba(2, 132, 199, 0.15);
+  --grid-color: rgba(16, 185, 129, 0.03); 
+}
+
+/* Soft Sand/Beige (Eco-Friendly Daylight Community) */
+html.light {
+  --brand-asphalt: #faf9f6;          /* Soft beige/off-white */
+  --brand-asphalt-light: #ffffff;    /* Clean panels */
+  --brand-asphalt-lighter: #e5e7eb;  /* Warm borders */
+  --brand-accent-amber: #10b981;     /* Emerald Green */
+  --brand-accent-amber-hover: #059669;
+  --brand-accent-amber-glow: rgba(16, 185, 129, 0.08);
+  --brand-sign-blue: #0284c7;        /* Clean daylight guidance blue */
+  --brand-sign-blue-hover: #0369a1;
+  --brand-sign-blue-glow: rgba(2, 132, 199, 0.08);
+  --grid-color: rgba(16, 185, 129, 0.05); /* Optimistic guidance mapping grid */
+
+  /* Base Text Colors */
+  color: #0b1c14 !important;
+}
+
+html.light body {
+  background-color: #faf9f6 !important;
+  color: #0b1c14 !important;
+}
+
+/* Dynamic text color inversion rules to handle tailwind colors in light mode */
+html.light .text-gray-100 { color: #111827 !important; }
+html.light .text-gray-50 { color: #030712 !important; }
+html.light .text-gray-200 { color: #1f2937 !important; }
+html.light .text-gray-300 { color: #374151 !important; }
+html.light .text-gray-400 { color: #4b5563 !important; }
+html.light .text-gray-500 { color: #6b7280 !important; }
+
+/* Invert default borders */
+html.light .border-brand-asphalt-lighter {
+  border-color: #e5e5e3 !important;
+}
+html.light .divide-brand-asphalt-lighter > * + * {
+  border-color: #e5e5e3 !important;
+}
+
+/* Soften extreme dark background sections to light white */
+html.light .bg-brand-asphalt\/40 {
+  background-color: rgba(244, 244, 243, 0.5) !important;
+}
+html.light .bg-brand-asphalt\/60 {
+  background-color: rgba(244, 244, 243, 0.7) !important;
+}
+html.light .bg-brand-asphalt\/20 {
+  background-color: rgba(244, 244, 243, 0.2) !important;
+}
+html.light .bg-brand-asphalt\/85 {
+  background-color: rgba(244, 244, 243, 0.85) !important;
+}
+html.light .bg-brand-asphalt\/50 {
+  background-color: rgba(244, 244, 243, 0.5) !important;
+}
+
+html.light .bg-brand-asphalt {
+  background-color: #f4f4f3 !important;
 }
 
 /* Custom Base Styles */
 html, body {
-  background-color: #0f111a; /* brand-asphalt */
-  color: #f3f4f6; /* gray-100 */
+  background-color: var(--brand-asphalt);
+  color: #f4f4f3; /* default dark gray */
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-size: 18px; /* Enhanced readability scaling for all ages */
   margin: 0;
   padding: 0;
   min-height: 100vh;
@@ -40,12 +114,12 @@ html, body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0f111a;
+  background: var(--brand-asphalt);
 }
 ::-webkit-scrollbar-thumb {
-  background: #22293b;
+  background: var(--brand-asphalt-lighter);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #facc15;
+  background: var(--brand-accent-amber);
 }

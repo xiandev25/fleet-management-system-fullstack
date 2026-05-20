@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  # Database Service (PostgreSQL)
+  db:
+    image: postgres:15-alpine
+    container_name: fleet_flow_db
+    environment:
+      POSTGRES_DB: fleet_db
+      POSTGRES_USER: fleet_user
+      POSTGRES_PASSWORD: fleet_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - fleet_network
+
+  # Backend Service (Django API)
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: fleet_flow_backend
+    restart: on-failure
+    command: >
+      bash -c "python manage.py migrate &&
+               python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./backend:/app
+      - /app/venv/  # Exclude container environment from local override
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=True
+      - SECRET_KEY=django-insecure-docker-dev-key-static-321
+      - DB_NAME=fleet_db
+      - DB_USER=fleet_user
+      - DB_PASSWORD=fleet_pass
+      - DB_HOST=db
+      - DB_PORT=5432
+      - ALLOWED_HOSTS=localhost,127.0.0.1,backend
+    depends_on:
+      - db
+    networks:
+      - fleet_network
+
+  # Frontend Service (Vue.js + Vite Dev Server with HMR)
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: build-stage
+    container_name: fleet_flow_frontend
+    # Override the production Nginx command in the Dockerfile for local dev!
+    command: npm run dev -- --host 0.0.0.0
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules/  # Exclude container node_modules from local override
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:8000/api/
+    depends_on:
+      - backend
+    networks:
+      - fleet_network
+
+volumes:
+  postgres_data:
+
+networks:
+  fleet_network:
+    driver: bridge

@@ -9,24 +9,9 @@
         <svg class="w-8 h-8 text-brand-highway-yellow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
         </svg>
-        <span class="font-extrabold text-lg tracking-wider text-gray-50">
-          FLEET<span class="text-brand-highway-yellow">FLOW</span>
+        <span class="font-extrabold text-sm tracking-widest text-gray-50 uppercase">
+          FLEET <span class="text-brand-highway-yellow">SYSTEM</span>
         </span>
-      </div>
-
-      <!-- User Profile Card -->
-      <div class="p-5 border-b border-brand-asphalt-lighter bg-brand-asphalt/40">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-full bg-brand-asphalt-lighter flex items-center justify-center border border-brand-highway-yellow/30 font-bold text-brand-highway-yellow">
-            {{ userInitials }}
-          </div>
-          <div class="overflow-hidden">
-            <h4 class="font-semibold text-sm truncate text-gray-100">{{ auth.user?.username || 'Guest User' }}</h4>
-            <span class="inline-flex items-center mt-1 px-2 py-0.5 rounded text-xs font-semibold bg-brand-sign-blue-glow text-brand-sign-blue border border-brand-sign-blue/20 uppercase tracking-wider">
-              {{ auth.user?.role || 'Visitor' }}
-            </span>
-          </div>
-        </div>
       </div>
 
       <!-- Navigation Links -->
@@ -48,19 +33,6 @@
           {{ item.name }}
         </router-link>
       </nav>
-
-      <!-- Logout Button -->
-      <div class="p-4 border-t border-brand-asphalt-lighter">
-        <button 
-          @click="handleLogout"
-          class="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium text-gray-400 hover:bg-red-500/10 hover:text-red-400 border border-transparent transition-all duration-200 group cursor-pointer"
-        >
-          <svg class="w-5 h-5 text-gray-400 group-hover:text-red-400 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-          </svg>
-          Sign Out
-        </button>
-      </div>
     </aside>
 
     <!-- Main Workspace -->
@@ -90,6 +62,9 @@
             <span class="w-2.5 h-2.5 rounded-full bg-status-go animate-pulse"></span>
             <span class="text-gray-300 font-medium tracking-wide">All Routes Clear</span>
           </div>
+
+          <!-- Reusable User Menu Settings Dropdown -->
+          <UserMenu />
         </div>
       </header>
 
@@ -111,18 +86,10 @@
 
 <script setup>
 import { computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
-import { useAuthStore } from '../stores/auth'
+import { useRoute } from 'vue-router'
+import UserMenu from './UserMenu.vue'
 
-const auth = useAuthStore()
 const route = useRoute()
-const router = useRouter()
-
-// Get user initials for avatar
-const userInitials = computed(() => {
-  const name = auth.user?.username || 'G'
-  return name.slice(0, 2).toUpperCase()
-})
 
 // Current route name for dashboard header
 const currentRouteName = computed(() => {
@@ -132,12 +99,6 @@ const currentRouteName = computed(() => {
 // Active route class checker
 const isActive = (path) => {
   return route.path === path
-}
-
-// Perform Logout
-const handleLogout = () => {
-  auth.logout()
-  router.push('/login')
 }
 
 // Navigation SVG components
@@ -190,41 +151,16 @@ const BillingIcon = {
   `
 }
 
-// Role-Based Navigation Items Definition
+// Streamlined Superadmin & Manager specific navigations
 const navItems = computed(() => {
-  const role = auth.user?.role
-  
-  const baseItems = [
-    { name: 'Dashboard', to: '/', icon: DashboardIcon }
+  return [
+    { name: 'Dashboard', to: '/dashboard', icon: DashboardIcon },
+    { name: 'Fleet', to: '/fleet', icon: FleetIcon },
+    { name: 'Routes', to: '/routes', icon: RoutesIcon },
+    { name: 'Clients', to: '/clients', icon: ClientsIcon },
+    { name: 'Operations', to: '/operations', icon: OperationsIcon },
+    { name: 'Billing', to: '/billing', icon: BillingIcon },
   ]
-
-  if (role === 'ADMIN' || role === 'MANAGER') {
-    return [
-      ...baseItems,
-      { name: 'Fleet', to: '/fleet', icon: FleetIcon },
-      { name: 'Routes', to: '/routes', icon: RoutesIcon },
-      { name: 'Clients', to: '/clients', icon: ClientsIcon },
-      { name: 'Operations', to: '/operations', icon: OperationsIcon },
-      { name: 'Billing', to: '/billing', icon: BillingIcon },
-    ]
-  }
-
-  if (role === 'DRIVER') {
-    return [
-      ...baseItems,
-      { name: 'My Trips', to: '/trips', icon: OperationsIcon },
-    ]
-  }
-
-  if (role === 'GUARDIAN') {
-    return [
-      ...baseItems,
-      { name: 'My Children', to: '/children', icon: ClientsIcon },
-      { name: 'Invoices', to: '/invoices', icon: BillingIcon },
-    ]
-  }
-
-  return baseItems
 })
 </script>
 

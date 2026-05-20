@@ -12,17 +12,18 @@
       
       <!-- Top road/fleet icon header -->
       <div class="flex flex-col items-center mb-8">
-        <div class="w-16 h-16 rounded-2xl bg-brand-asphalt flex items-center justify-center border-2 border-brand-highway-yellow shadow-lg shadow-brand-highway-yellow-glow mb-4">
+        <router-link 
+          to="/"
+          class="w-16 h-16 rounded-2xl bg-brand-asphalt flex items-center justify-center border-2 border-brand-highway-yellow shadow-lg shadow-brand-highway-yellow-glow mb-4 transition-transform duration-200 hover:scale-105 active:scale-95 cursor-pointer block"
+        >
           <svg class="w-9 h-9 text-brand-highway-yellow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
           </svg>
-        </div>
-        <h2 class="text-2xl font-extrabold tracking-wider text-gray-50 uppercase">
-          FLEET<span class="text-brand-highway-yellow">FLOW</span>
+        </router-link>
+        <h2 class="text-2xl font-extrabold tracking-wider text-gray-50 uppercase text-center">
+          FLEET<br />
+          <span class="text-brand-highway-yellow">MANAGEMENT SYSTEM</span>
         </h2>
-        <p class="text-xs text-gray-400 font-semibold uppercase tracking-widest mt-2">
-          Management Portal
-        </p>
       </div>
 
       <!-- Alert Message Box (if login fails) -->
@@ -103,7 +104,7 @@
             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
-          <span>{{ auth.loading ? 'Initializing Routes...' : 'Access Dashboard' }}</span>
+          <span>{{ auth.loading ? 'Initializing Routes...' : 'Log In' }}</span>
         </button>
       </form>
       
@@ -134,7 +135,7 @@ const password = ref('')
 const handleSubmit = async () => {
   const success = await auth.login(username.value, password.value)
   if (success) {
-    router.push('/')
+    router.push('/dashboard')
   }
 }
 </script>

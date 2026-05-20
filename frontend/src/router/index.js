@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Landing from '../views/Landing.vue'
 import Login from '../views/Login.vue'
 import Dashboard from '../views/Dashboard.vue'
+import FleetRegistry from '../views/FleetRegistry.vue'
+import RoutesRegistry from '../views/RoutesRegistry.vue'
 import MainLayout from '../components/MainLayout.vue'
 import { useAuthStore } from '../stores/auth'
 
@@ -26,6 +28,16 @@ const routes = [
         path: '',
         name: 'Dashboard',
         component: Dashboard
+      },
+      {
+        path: 'fleet',
+        name: 'FleetRegistry',
+        component: FleetRegistry
+      },
+      {
+        path: 'routes',
+        name: 'RoutesRegistry',
+        component: RoutesRegistry
       }
     ]
   },

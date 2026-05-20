@@ -155,11 +155,11 @@ const BillingIcon = {
 const navItems = computed(() => {
   return [
     { name: 'Dashboard', to: '/dashboard', icon: DashboardIcon },
-    { name: 'Fleet', to: '/fleet', icon: FleetIcon },
-    { name: 'Routes', to: '/routes', icon: RoutesIcon },
-    { name: 'Clients', to: '/clients', icon: ClientsIcon },
-    { name: 'Operations', to: '/operations', icon: OperationsIcon },
-    { name: 'Billing', to: '/billing', icon: BillingIcon },
+    { name: 'Fleet', to: '/dashboard/fleet', icon: FleetIcon },
+    { name: 'Routes', to: '/dashboard/routes', icon: RoutesIcon },
+    { name: 'Clients', to: '/dashboard/clients', icon: ClientsIcon },
+    { name: 'Operations', to: '/dashboard/operations', icon: OperationsIcon },
+    { name: 'Billing', to: '/dashboard/billing', icon: BillingIcon },
   ]
 })
 </script>

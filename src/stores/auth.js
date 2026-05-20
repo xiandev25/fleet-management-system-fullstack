@@ -1,6 +1,23 @@
 import { defineStore } from 'pinia'
 import api from '../api/axios'
 
+// Helper function to decode JWT payload safely in the browser
+function parseJwt(token) {
+  try {
+    const base64Url = token.split('.')[1]
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+    const jsonPayload = decodeURIComponent(
+      window.atob(base64)
+        .split('')
+        .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+        .join('')
+    )
+    return JSON.parse(jsonPayload)
+  } catch (error) {
+    return null
+  }
+}
+
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     user: JSON.parse(localStorage.getItem('user')) || null,
@@ -11,6 +28,7 @@ export const useAuthStore = defineStore('auth', {
 
   getters: {
     isAuthenticated: (state) => !!state.token,
+    userRole: (state) => state.user?.role || null,
   },
 
   actions: {
@@ -23,9 +41,18 @@ export const useAuthStore = defineStore('auth', {
         localStorage.setItem('access_token', this.token)
         localStorage.setItem('refresh_token', response.data.refresh)
         
-        // You could also fetch user details here if needed
-        this.user = { username } // Placeholder
-        localStorage.setItem('user', JSON.stringify(this.user))
+        // Decode user details and role from custom JWT payload
+        const decoded = parseJwt(this.token)
+        if (decoded) {
+          this.user = {
+            username: decoded.username,
+            role: decoded.role,
+          }
+          localStorage.setItem('user', JSON.stringify(this.user))
+        } else {
+          this.user = { username }
+          localStorage.setItem('user', JSON.stringify(this.user))
+        }
         
         return true
       } catch (err) {

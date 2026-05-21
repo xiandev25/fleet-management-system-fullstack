@@ -146,21 +146,21 @@
           <form id="resourceForm" @submit.prevent="submitModalForm" class="space-y-4">
             <div>
               <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Name</label>
-              <input v-model="modal.data.name" required class="form-input" placeholder="e.g. Line A — North Circuit" />
+              <input v-model="modal.data.name" required class="w-full px-3 py-2.5 bg-brand-asphalt border border-brand-asphalt-lighter rounded-xl text-sm focus:outline-none focus:border-brand-highway-yellow" placeholder="e.g. Line A — North Circuit" />
             </div>
             <template v-if="modal.type === 'shuttle'">
               <div>
                 <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Pickup Point</label>
-                <input v-model="modal.data.pickup_point" required class="form-input" placeholder="Location name" />
+                <input v-model="modal.data.pickup_point" required class="w-full px-3 py-2.5 bg-brand-asphalt border border-brand-asphalt-lighter rounded-xl text-sm focus:outline-none focus:border-brand-highway-yellow" placeholder="Location name" />
               </div>
               <div>
                 <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Scheduled Time</label>
-                <input v-model="modal.data.scheduled_time" type="time" required class="form-input" />
+                <input v-model="modal.data.scheduled_time" type="time" required class="w-full px-3 py-2.5 bg-brand-asphalt border border-brand-asphalt-lighter rounded-xl text-sm focus:outline-none focus:border-brand-highway-yellow" />
               </div>
             </template>
             <div>
               <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Description (optional)</label>
-              <textarea v-model="modal.data.description" rows="3" class="form-input"></textarea>
+              <textarea v-model="modal.data.description" rows="3" class="w-full px-3 py-2.5 bg-brand-asphalt border border-brand-asphalt-lighter rounded-xl text-sm focus:outline-none focus:border-brand-highway-yellow"></textarea>
             </div>
           </form>
         </div>
@@ -194,16 +194,16 @@
           <form @submit.prevent="submitStop" class="grid grid-cols-2 md:grid-cols-4 gap-3 items-end">
             <div>
               <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Seq #</label>
-              <input v-model.number="stopForm.sequence_number" type="number" min="1" required class="form-input text-sm" />
+              <input v-model.number="stopForm.sequence_number" type="number" min="1" required class="w-full px-3 py-2.5 bg-brand-asphalt border border-brand-asphalt-lighter rounded-xl text-sm focus:outline-none focus:border-brand-highway-yellow text-sm" />
             </div>
             <div>
               <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Time</label>
-              <input v-model="stopForm.scheduled_time" type="time" required class="form-input text-sm" />
+              <input v-model="stopForm.scheduled_time" type="time" required class="w-full px-3 py-2.5 bg-brand-asphalt border border-brand-asphalt-lighter rounded-xl text-sm focus:outline-none focus:border-brand-highway-yellow text-sm" />
             </div>
             <div class="col-span-2">
               <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Stop Name</label>
               <div class="flex gap-2">
-                <input v-model="stopForm.name" required class="form-input text-sm flex-grow" placeholder="e.g. Main Gate" />
+                <input v-model="stopForm.name" required class="w-full px-3 py-2.5 bg-brand-asphalt border border-brand-asphalt-lighter rounded-xl text-sm focus:outline-none focus:border-brand-highway-yellow text-sm flex-grow" placeholder="e.g. Main Gate" />
                 <button type="submit" class="px-4 py-2 bg-brand-highway-yellow hover:bg-brand-highway-yellow-hover text-brand-asphalt font-bold text-xs uppercase tracking-wider rounded-xl shadow-md transition-all flex-shrink-0">Add</button>
               </div>
             </div>

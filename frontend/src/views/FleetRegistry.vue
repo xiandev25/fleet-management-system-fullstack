@@ -137,31 +137,31 @@
           <form id="vehicleForm" @submit.prevent="submitForm" class="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
               <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">License Plate</label>
-              <input v-model="formData.license_plate" required class="form-input" placeholder="e.g. LT-123-XY" />
+              <input v-model="formData.license_plate" required class="w-full px-3 py-2.5 bg-brand-asphalt border border-brand-asphalt-lighter rounded-xl text-sm focus:outline-none focus:border-brand-highway-yellow" placeholder="e.g. LT-123-XY" />
             </div>
             <div>
               <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Immatriculation No.</label>
-              <input v-model="formData.immatriculation_number" class="form-input" placeholder="Optional" />
+              <input v-model="formData.immatriculation_number" class="w-full px-3 py-2.5 bg-brand-asphalt border border-brand-asphalt-lighter rounded-xl text-sm focus:outline-none focus:border-brand-highway-yellow" placeholder="Optional" />
             </div>
             <div>
               <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Brand</label>
-              <input v-model="formData.brand" required class="form-input" placeholder="e.g. Toyota" />
+              <input v-model="formData.brand" required class="w-full px-3 py-2.5 bg-brand-asphalt border border-brand-asphalt-lighter rounded-xl text-sm focus:outline-none focus:border-brand-highway-yellow" placeholder="e.g. Toyota" />
             </div>
             <div>
               <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Model</label>
-              <input v-model="formData.model" required class="form-input" placeholder="e.g. Coaster" />
+              <input v-model="formData.model" required class="w-full px-3 py-2.5 bg-brand-asphalt border border-brand-asphalt-lighter rounded-xl text-sm focus:outline-none focus:border-brand-highway-yellow" placeholder="e.g. Coaster" />
             </div>
             <div>
               <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Manufacture Year</label>
-              <input v-model.number="formData.manufacture_year" type="number" required class="form-input" placeholder="2018" />
+              <input v-model.number="formData.manufacture_year" type="number" required class="w-full px-3 py-2.5 bg-brand-asphalt border border-brand-asphalt-lighter rounded-xl text-sm focus:outline-none focus:border-brand-highway-yellow" placeholder="2018" />
             </div>
             <div>
               <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Current Mileage (KM)</label>
-              <input v-model.number="formData.current_mileage" type="number" required class="form-input" placeholder="0" />
+              <input v-model.number="formData.current_mileage" type="number" required class="w-full px-3 py-2.5 bg-brand-asphalt border border-brand-asphalt-lighter rounded-xl text-sm focus:outline-none focus:border-brand-highway-yellow" placeholder="0" />
             </div>
             <div class="md:col-span-2">
               <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1.5">Operational Status</label>
-              <select v-model="formData.status" required class="form-input appearance-none">
+              <select v-model="formData.status" required class="w-full px-3 py-2.5 bg-brand-asphalt border border-brand-asphalt-lighter rounded-xl text-sm focus:outline-none focus:border-brand-highway-yellow">
                 <option value="AVAILABLE">Available</option>
                 <option value="IN_USE">In Use</option>
                 <option value="IN_MAINTENANCE">In Maintenance</option>
@@ -306,6 +306,7 @@ onMounted(() => fetchVehicles())
   outline: none;
   transition: border-color 0.2s;
 }
+
 .form-input:focus {
   border-color: var(--brand-accent-amber);
 }

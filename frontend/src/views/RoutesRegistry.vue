@@ -194,7 +194,7 @@
           <form @submit.prevent="submitStop" class="grid grid-cols-2 md:grid-cols-4 gap-3 items-end">
             <div>
               <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Seq #</label>
-              <input v-model.number="stopForm.sequence_number" type="number" min="1" required class="w-full px-3 py-2.5 bg-brand-asphalt border border-brand-asphalt-lighter rounded-xl text-sm focus:outline-none focus:border-brand-highway-yellow text-sm" />
+              <input v-model.number="stopForm.sequence_number" type="number" min="1" required readonly class="w-full px-3 py-2.5 bg-brand-asphalt border border-brand-asphalt-lighter rounded-xl text-sm focus:outline-none focus:border-brand-highway-yellow text-sm" />
             </div>
             <div>
               <label class="block text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1">Time</label>

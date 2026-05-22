@@ -58,7 +58,7 @@
       <div class="bg-brand-asphalt-light p-6 rounded-2xl border border-brand-asphalt-lighter flex items-center justify-between transition-all hover:border-brand-highway-yellow/20">
         <div class="space-y-1">
           <span class="text-xs font-extrabold text-gray-400 uppercase tracking-widest">Active Lines</span>
-          <h2 class="text-3xl font-black text-gray-100">{{ stats.routes.total }}</h2>
+          <h2 class="text-3xl font-black text-gray-100">{{ stats.lines.total }}</h2>
           <span class="text-xs text-brand-sign-blue font-semibold">Transit Channels</span>
         </div>
         <div class="w-12 h-12 rounded-xl bg-brand-asphalt flex items-center justify-center border border-brand-asphalt-lighter">
@@ -228,11 +228,12 @@ import { ref, onMounted } from 'vue'
 import api from '../api/axios'
 
 const vehicles = ref([])
+const lines = ref([])
 const showAddVehicleModal = ref(false)
 
 const stats = ref({
   vehicles: { total: 0, active: 0, repair: 0 },
-  routes: { total: 0 },
+  lines: { total: 0 },
   billing: { unpaid: 0 }
 })
 
@@ -249,13 +250,18 @@ const newVehicle = ref({
 // Fetch summary metrics & data lists
 const fetchData = async () => {
   try {
-    const res = await api.get('fleet/vehicles/')
-    vehicles.value = res.data
+    const resVehicles = await api.get('fleet/vehicles/')
+    vehicles.value = resVehicles.data
 
     // Compile active vs workshop statistics dynamically
     stats.value.vehicles.total = vehicles.value.length
     stats.value.vehicles.active = vehicles.value.filter(v => v.status === 'AVAILABLE').length
     stats.value.vehicles.repair = vehicles.value.filter(v => v.status === 'IN_REPAIR').length
+
+    const resRoutes = await api.get('routes/lines')
+    lines.value = resRoutes.data
+    stats.value.lines.total = lines.value.length
+
   } catch (err) {
     console.error('Error fetching dashboard telemetry:', err)
   }

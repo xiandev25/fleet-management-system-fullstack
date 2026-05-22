@@ -43,7 +43,7 @@
       <div class="bg-brand-asphalt-light p-6 rounded-2xl border border-brand-asphalt-lighter flex items-center justify-between transition-all hover:border-brand-highway-yellow/20">
         <div class="space-y-1">
           <span class="text-xs font-extrabold text-gray-400 uppercase tracking-widest">In Workshop</span>
-          <h2 class="text-3xl font-black text-gray-100">{{ stats.vehicles.maintenance }}</h2>
+          <h2 class="text-3xl font-black text-gray-100">{{ stats.vehicles.repair }}</h2>
           <span class="text-xs text-status-caution font-semibold">Needs Attention</span>
         </div>
         <div class="w-12 h-12 rounded-xl bg-brand-asphalt flex items-center justify-center border border-brand-asphalt-lighter">
@@ -231,7 +231,7 @@ const vehicles = ref([])
 const showAddVehicleModal = ref(false)
 
 const stats = ref({
-  vehicles: { total: 0, active: 0, maintenance: 0 },
+  vehicles: { total: 0, active: 0, repair: 0 },
   routes: { total: 0 },
   billing: { unpaid: 0 }
 })
@@ -255,7 +255,7 @@ const fetchData = async () => {
     // Compile active vs workshop statistics dynamically
     stats.value.vehicles.total = vehicles.value.length
     stats.value.vehicles.active = vehicles.value.filter(v => v.status === 'AVAILABLE').length
-    stats.value.vehicles.maintenance = vehicles.value.filter(v => v.status === 'MAINTENANCE').length
+    stats.value.vehicles.repair = vehicles.value.filter(v => v.status === 'IN_REPAIR').length
   } catch (err) {
     console.error('Error fetching dashboard telemetry:', err)
   }

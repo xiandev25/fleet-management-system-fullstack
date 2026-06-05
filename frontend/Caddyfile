@@ -1,0 +1,32 @@
+# This Caddyfile handles HTTPS automatically and serves the Vue frontend while proxying /api/ to the Django backend.
+{
+    # We will pass the domain via an environment variable in docker-compose.prod.yml
+    # E.g. DOMAIN=1.2.3.4.nip.io
+}
+
+{$DOMAIN:localhost} {
+    # Serve static frontend files from /srv
+    root * /srv
+    
+    # Enable gzip compression
+    encode gzip
+
+    # Try files for Vue Router (SPA fallback to index.html)
+    try_files {path} /index.html
+
+    # Serve static files directly
+    file_server
+
+    # Reverse proxy API requests to the backend container
+    handle_path /api/* {
+        reverse_proxy backend:8000
+    }
+    
+    # Reverse proxy Django admin and static files
+    handle_path /admin/* {
+        reverse_proxy backend:8000
+    }
+    handle_path /static/* {
+        reverse_proxy backend:8000
+    }
+}

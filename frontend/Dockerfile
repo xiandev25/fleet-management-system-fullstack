@@ -6,11 +6,16 @@ RUN npm install
 COPY . .
 RUN npm run build
 
-# Stage 2: High-performance Nginx web server
-FROM nginx:stable-alpine AS production-stage
-COPY --from=build-stage /app/dist /usr/share/nginx/html
+# Stage 2: Caddy web server and reverse proxy
+FROM caddy:2.7-alpine AS production-stage
 
-# Expose HTTP port
-EXPOSE 80
+# Copy the built Vue app
+COPY --from=build-stage /app/dist /srv
 
-CMD ["nginx", "-g", "daemon off;"]
+# Copy the custom Caddyfile
+COPY Caddyfile /etc/caddy/Caddyfile
+
+# Expose HTTP and HTTPS ports
+EXPOSE 80 443
+
+CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]

@@ -83,14 +83,20 @@ jobs:
             DB_HOST=${{ secrets.RDS_DB_HOST }}
             DOMAIN=${{ secrets.DOMAIN_NIP_IO }}
             EOF
+
+            # Check if the .env.prod file was created
+            if [ ! -f ".env.prod" ]; then
+              echo "Error: .env.prod file not found!"
+              exit 1
+            fi
             
             # Build and restart containers using the prod compose file
-            docker compose -f docker-compose.prod.yml --env-file .env.prod build
-            docker compose -f docker-compose.prod.yml --env-file .env.prod down
-            docker compose -f docker-compose.prod.yml --env-file .env.prod up -d
+            sudo docker compose -f docker-compose.prod.yml --env-file .env.prod build
+            sudo docker compose -f docker-compose.prod.yml --env-file .env.prod down
+            sudo docker compose -f docker-compose.prod.yml --env-file .env.prod up -d
             
             # Run database migrations
-            docker compose -f docker-compose.prod.yml exec -T backend python manage.py migrate
+            sudo docker compose -f docker-compose.prod.yml exec -T backend python manage.py migrate
             
             # Optional: Seed the database (only if needed/first time)
             # docker compose -f docker-compose.prod.yml exec -T backend python manage.py seed_db

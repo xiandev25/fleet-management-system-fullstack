@@ -64,15 +64,11 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            ## If the repository hasn't been cloned yet, clone it first
-            #if [ ! -d "$HOME/Fleet-Management-System-Fullstack" ]; then
-            #  git clone https://github.com/${{ github.repository }}.git $HOME/Fleet-Management-System-Fullstack
-            #fi
-            # Remove the directory if it exists
-            rm -rf $HOME/Fleet-Management-System-Fullstack
-            ## Always clone the repository fresh
-            git clone https://github.com/${{ github.repository }}.git $HOME/Fleet-Management-System-Fullstack
-            
+            # If the repository hasn't been cloned yet, clone it first
+            if [ ! -d "$HOME/Fleet-Management-System-Fullstack" ]; then
+              git clone https://github.com/${{ github.repository }}.git $HOME/Fleet-Management-System-Fullstack
+            fi
+
             cd $HOME/Fleet-Management-System-Fullstack
             
             # Pull the latest code (in case it was already cloned)
@@ -87,16 +83,6 @@ jobs:
             DB_HOST=${{ secrets.RDS_DB_HOST }}
             DOMAIN=${{ secrets.DOMAIN_NIP_IO }}
             EOF
-
-            # Check if the .env.prod file was created
-            if [ ! -f ".env.prod" ]; then
-              echo "Error: .env.prod file not found!"
-              exit 1
-            fi
-            echo "--------------------------------------------------------------"
-            echo "Listing directory content:"
-            ls -la
-            echo "--------------------------------------------------------------"
 
             # Build and restart containers using the prod compose file
             sudo docker compose -f docker-compose.prod.yml --env-file .env.prod build

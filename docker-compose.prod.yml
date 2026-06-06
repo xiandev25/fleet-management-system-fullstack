@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Backend Service (Django API) running via Gunicorn
   backend:

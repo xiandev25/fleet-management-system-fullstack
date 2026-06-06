@@ -64,9 +64,14 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd ~/Fleet-Management-System-Fullstack
+            # If the repository hasn't been cloned yet, clone it first
+            if [ ! -d "$HOME/Fleet-Management-System-Fullstack" ]; then
+              git clone https://github.com/${{ github.repository }}.git $HOME/Fleet-Management-System-Fullstack
+            fi
             
-            # Pull the latest code
+            cd $HOME/Fleet-Management-System-Fullstack
+            
+            # Pull the latest code (in case it was already cloned)
             git pull origin main
             
             # Create a .env file for production secrets if it doesn't exist

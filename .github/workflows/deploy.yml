@@ -64,10 +64,14 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            # If the repository hasn't been cloned yet, clone it first
-            if [ ! -d "$HOME/Fleet-Management-System-Fullstack" ]; then
-              git clone https://github.com/${{ github.repository }}.git $HOME/Fleet-Management-System-Fullstack
-            fi
+            ## If the repository hasn't been cloned yet, clone it first
+            #if [ ! -d "$HOME/Fleet-Management-System-Fullstack" ]; then
+            #  git clone https://github.com/${{ github.repository }}.git $HOME/Fleet-Management-System-Fullstack
+            #fi
+            # Remove the directory if it exists
+            rm -rf $HOME/Fleet-Management-System-Fullstack
+            ## Always clone the repository fresh
+            git clone https://github.com/${{ github.repository }}.git $HOME/Fleet-Management-System-Fullstack
             
             cd $HOME/Fleet-Management-System-Fullstack
             

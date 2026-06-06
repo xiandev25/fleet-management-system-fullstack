@@ -89,7 +89,11 @@ jobs:
               echo "Error: .env.prod file not found!"
               exit 1
             fi
+            echo "--------------------------------------------------------------"
             echo ".env.prod file created successfully!"
+            cat .env.prod
+            echo ".env.prod file displayed successfully!"
+            echo "--------------------------------------------------------------"
 
             # Build and restart containers using the prod compose file
             sudo docker compose -f docker-compose.prod.yml --env-file .env.prod build

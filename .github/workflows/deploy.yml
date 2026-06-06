@@ -90,9 +90,8 @@ jobs:
               exit 1
             fi
             echo "--------------------------------------------------------------"
-            echo ".env.prod file created successfully!"
-            cat .env.prod
-            echo ".env.prod file displayed successfully!"
+            echo "Listing directory content:"
+            ls -la
             echo "--------------------------------------------------------------"
 
             # Build and restart containers using the prod compose file

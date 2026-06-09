@@ -65,11 +65,12 @@ jobs:
           DB_USER: ${{ secrets.RDS_DB_USER }}
           DB_PASSWORD: ${{ secrets.RDS_DB_PASSWORD }}
           DB_HOST: ${{ secrets.RDS_DB_HOST }}
+          DOMAIN: ${{ secrets.DOMAIN_NIP_IO }}
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          envs: DJANGO_SECRET_KEY,DB_NAME,DB_USER,DB_PASSWORD,DB_HOST
+          envs: DJANGO_SECRET_KEY,DB_NAME,DB_USER,DB_PASSWORD,DB_HOST,DOMAIN
           script: |
             # If the repository hasn't been cloned yet, clone it first
             if [ ! -d "$HOME/Fleet-Management-System-Fullstack" ]; then
@@ -80,16 +81,17 @@ jobs:
             
             # Pull the latest code (in case it was already cloned)
             git pull origin main
-            
+
             # Create the .env.prod file with the secrets
-            echo "SECRET_KEY='$DJANGO_SECRET_KEY'" > .env.prod
+            echo "SECRET_KEY='$SECRET_KEY'" > .env.prod
             echo "DB_NAME='$DB_NAME'" >> .env.prod
             echo "DB_USER='$DB_USER'" >> .env.prod
             echo "DB_PASSWORD='$DB_PASSWORD'" >> .env.prod
             echo "DB_HOST='$DB_HOST'" >> .env.prod
             echo "DB_PORT='5432'" >> .env.prod
             echo "DEBUG='False'" >> .env.prod
-
+            echo "DOMAIN='$DOMAIN'" >> .env.prod
+            
             # Build and restart containers using the prod compose file
             sudo docker compose -f docker-compose.prod.yml --env-file .env.prod build
             sudo docker compose -f docker-compose.prod.yml --env-file .env.prod down

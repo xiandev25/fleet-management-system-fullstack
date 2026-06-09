@@ -82,15 +82,7 @@ jobs:
             # Pull the latest code (in case it was already cloned)
             git pull origin main
             
-            ## Create a .env file for production secrets if it doesn't exist
-            #cat <<EOF > .env.prod
-            #SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
-            #DB_NAME=${{ secrets.RDS_DB_NAME }}
-            #DB_USER=${{ secrets.RDS_DB_USER }}
-            #DB_PASSWORD=${{ secrets.RDS_DB_PASSWORD }}
-            #DB_HOST=${{ secrets.RDS_DB_HOST }}
-            #DOMAIN=${{ secrets.DOMAIN_NIP_IO }}
-            #EOF
+            # Create the .env.prod file with the secrets
             echo "SECRET_KEY='$DJANGO_SECRET_KEY'" > .env.prod
             echo "DB_NAME='$DB_NAME'" >> .env.prod
             echo "DB_USER='$DB_USER'" >> .env.prod
@@ -98,8 +90,7 @@ jobs:
             echo "DB_HOST='$DB_HOST'" >> .env.prod
             echo "DB_PORT='5432'" >> .env.prod
             echo "DEBUG='False'" >> .env.prod
-            echo "DOMAIN_NIP_IO='$DOMAIN_NIP_IO'" >> .env.prod
-            echo "ALLOWED_HOSTS='$DOMAIN_NIP_IO'" >> .env.prod
+            echo "DOMAIN='$DOMAIN_NIP_IO'" >> .env.prod
 
             # Build and restart containers using the prod compose file
             sudo docker compose -f docker-compose.prod.yml --env-file .env.prod build

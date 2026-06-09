@@ -98,7 +98,7 @@ jobs:
             echo "DB_HOST='$DB_HOST'" >> .env.prod
             echo "DB_PORT='5432'" >> .env.prod
             echo "DEBUG='False'" >> .env.prod
-            echo "DOMAIN='$DOMAIN'" >> .env.prod
+            echo "DOMAIN='$DOMAIN_NIP_IO'" >> .env.prod
 
             # Build and restart containers using the prod compose file
             sudo docker compose -f docker-compose.prod.yml --env-file .env.prod build

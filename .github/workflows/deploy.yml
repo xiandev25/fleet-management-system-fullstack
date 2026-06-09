@@ -91,7 +91,7 @@ jobs:
             #DB_HOST=${{ secrets.RDS_DB_HOST }}
             #DOMAIN=${{ secrets.DOMAIN_NIP_IO }}
             #EOF
-            echo "SECRET_KEY='$SECRET_KEY'" > .env.prod
+            echo "SECRET_KEY='$DJANGO_SECRET_KEY'" > .env.prod
             echo "DB_NAME='$DB_NAME'" >> .env.prod
             echo "DB_USER='$DB_USER'" >> .env.prod
             echo "DB_PASSWORD='$DB_PASSWORD'" >> .env.prod

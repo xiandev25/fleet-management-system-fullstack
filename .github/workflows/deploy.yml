@@ -59,10 +59,18 @@ jobs:
     steps:
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.0.3
+        env:
+          DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+          DB_NAME: ${{ secrets.RDS_DB_NAME }}
+          DB_USER: ${{ secrets.RDS_DB_USER }}
+          DB_PASSWORD: ${{ secrets.RDS_DB_PASSWORD }}
+          DB_HOST: ${{ secrets.RDS_DB_HOST }}
+          DOMAIN: ${{ secrets.DOMAIN_NIP_IO }}
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
+          envs: DJANGO_SECRET_KEY,DB_NAME,DB_USER,DB_PASSWORD,DB_HOST,DOMAIN
           script: |
             # If the repository hasn't been cloned yet, clone it first
             if [ ! -d "$HOME/Fleet-Management-System-Fullstack" ]; then
@@ -74,15 +82,21 @@ jobs:
             # Pull the latest code (in case it was already cloned)
             git pull origin main
             
-            # Create a .env file for production secrets if it doesn't exist
-            cat <<EOF > .env.prod
-            SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
-            DB_NAME=${{ secrets.RDS_DB_NAME }}
-            DB_USER=${{ secrets.RDS_DB_USER }}
-            DB_PASSWORD=${{ secrets.RDS_DB_PASSWORD }}
-            DB_HOST=${{ secrets.RDS_DB_HOST }}
-            DOMAIN=${{ secrets.DOMAIN_NIP_IO }}
-            EOF
+            ## Create a .env file for production secrets if it doesn't exist
+            #cat <<EOF > .env.prod
+            #SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}
+            #DB_NAME=${{ secrets.RDS_DB_NAME }}
+            #DB_USER=${{ secrets.RDS_DB_USER }}
+            #DB_PASSWORD=${{ secrets.RDS_DB_PASSWORD }}
+            #DB_HOST=${{ secrets.RDS_DB_HOST }}
+            #DOMAIN=${{ secrets.DOMAIN_NIP_IO }}
+            #EOF
+            echo "SECRET_KEY='$SECRET_KEY'" > .env
+            echo "DB_NAME='$DB_NAME'" >> .env
+            echo "DB_USER='$DB_USER'" >> .env
+            echo "DB_PASSWORD='$DB_PASSWORD'" >> .env
+            echo "DB_HOST='$DB_HOST'" >> .env
+            echo "DB_PORT='5432'" >> .env
 
             # Build and restart containers using the prod compose file
             sudo docker compose -f docker-compose.prod.yml --env-file .env.prod build

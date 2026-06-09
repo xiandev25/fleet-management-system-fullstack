@@ -91,12 +91,12 @@ jobs:
             #DB_HOST=${{ secrets.RDS_DB_HOST }}
             #DOMAIN=${{ secrets.DOMAIN_NIP_IO }}
             #EOF
-            echo "SECRET_KEY='$SECRET_KEY'" > .env
-            echo "DB_NAME='$DB_NAME'" >> .env
-            echo "DB_USER='$DB_USER'" >> .env
-            echo "DB_PASSWORD='$DB_PASSWORD'" >> .env
-            echo "DB_HOST='$DB_HOST'" >> .env
-            echo "DB_PORT='5432'" >> .env
+            echo "SECRET_KEY='$SECRET_KEY'" > .env.prod
+            echo "DB_NAME='$DB_NAME'" >> .env.prod
+            echo "DB_USER='$DB_USER'" >> .env.prod
+            echo "DB_PASSWORD='$DB_PASSWORD'" >> .env.prod
+            echo "DB_HOST='$DB_HOST'" >> .env.prod
+            echo "DB_PORT='5432'" >> .env.prod
 
             # Build and restart containers using the prod compose file
             sudo docker compose -f docker-compose.prod.yml --env-file .env.prod build
